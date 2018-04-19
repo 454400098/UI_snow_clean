@@ -4,9 +4,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .forms import SnowForm,Snowcarform, Snowdata
 from .models import Snow
-
-from django.contrib import messages
-
+from .models import userinput
 # Create your views here.
 
 
@@ -24,15 +22,18 @@ from django.contrib import messages
 
 
 def add_snow(request):
-    if request.method == "POST":
-        form = Snowdata(request.POST)
+    if request.method == "GET":
+        form = Snowdata(request.GET)
         if form.is_valid():
             form.save()
-            messages.success(request,'We will be in touch')
-            return HttpResponseRedirect('/thank-you')
+            return HttpResponseRedirect('/result')
     else:
         form=Snowdata()
     return render(request,'snow/snow_form.html', {'form':form})
+
+def result(request):
+    re=userinput.objects.all
+    return render(request,'snow/result.html', {'result':re})
 
 def edit_snow(request,id=None):
     item = get_object_or_404(Snow,id=id) #return object with id or raist 404 error
