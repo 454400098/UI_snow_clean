@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .forms import SnowForm,Snowcarform, Snowdata
 from .models import Snow
-# Create your views here.
 
+from django.contrib import messages
+
+# Create your views here.
 
 
 #def add_snow(request):
@@ -25,7 +27,9 @@ def add_snow(request):
     if request.method == "POST":
         form = Snowdata(request.POST)
         if form.is_valid():
-            pass
+            form.save()
+            messages.success(request,'We will be in touch')
+            return HttpResponseRedirect('/thank-you')
     else:
         form=Snowdata()
     return render(request,'snow/snow_form.html', {'form':form})

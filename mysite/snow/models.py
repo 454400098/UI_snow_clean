@@ -20,3 +20,7 @@ class Snowcar(models.Model):
 
     def __str__(self):
         return '%s ' % self.carnum
+
+class userinput(models.Model):
+    loc = models.CharField(max_length=20)
+    num = models.CharField(max_length=20)
