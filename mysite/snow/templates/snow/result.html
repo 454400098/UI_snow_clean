@@ -1,0 +1,12 @@
+{% block content %}
+
+<h4>Thank you</h4>
+<table>
+
+{% for snow in result %}
+    <tr><td>{{ snow.loc }}</td><td>{{ snow.num }}</td></tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}
