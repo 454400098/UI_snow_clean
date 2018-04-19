@@ -5,3 +5,4 @@ class SnowForm(ModelForm):
     class Meta:
         model = Snow
         fields = ['title']
+

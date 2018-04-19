@@ -12,3 +12,11 @@ class Snow(models.Model):
     def __str__(self):
         return '%s ' % self.title
 
+
+
+class Snowcar(models.Model):
+    carnum = models.CharField(max_length=255,default='',blank=True)
+    #description =  models.TextField(default='',blank=True)
+
+    def __str__(self):
+        return '%s ' % self.carnum
