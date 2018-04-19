@@ -5,6 +5,10 @@ from django.shortcuts import render, get_object_or_404
 from .forms import SnowForm,Snowcarform, Snowdata
 from .models import Snow
 from .models import userinput
+import osmnx as ox
+import matplotlib.pyplot as plt
+from PIL import Image
+
 # Create your views here.
 
 
@@ -32,7 +36,8 @@ def add_snow(request):
     return render(request,'snow/snow_form.html', {'form':form})
 
 def result(request):
-    re=userinput.objects.all
+    re=userinput.objects.all()
+    plot()
     return render(request,'snow/result.html', {'result':re})
 
 def edit_snow(request,id=None):
@@ -42,4 +47,12 @@ def edit_snow(request,id=None):
         form.save()
 
     return render(request,'snow/snow_form.html',{'form':form})
+
+def plot():
+    place = "Rutgers University"
+    k = 3
+    G = ox.graph_from_address(place, network_type='drive')
+    ox.plot_graph(G, save=True, file_format='png', filename='temp2', show=False)
+    im = Image.open('/Users/zhenghaodong/Desktop/UI/mysite/images/temp2.png')
+    im.save('/Users/zhenghaodong/Desktop/UI/mysite/snow/static/snow/images/temp2.png','png')
 
