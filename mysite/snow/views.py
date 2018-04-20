@@ -28,16 +28,20 @@ from PIL import Image
 def add_snow(request):
     if request.method == "GET":
         form = Snowdata(request.GET)
+
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/result')
+            location = form.cleaned_data['loc']
+            number = form.cleaned_data['num']
+            plot(location, number)
+            #form.save()
+         #   return HttpResponseRedirect('/result',{'form':form})
     else:
         form=Snowdata()
     return render(request,'snow/snow_form.html', {'form':form})
 
 def result(request):
-    re=userinput.objects.all()
-    plot()
+    re=Snowdata(request.GET)
+   #plot(add_snow.location, add_snow.number)
     return render(request,'snow/result.html', {'result':re})
 
 def edit_snow(request,id=None):
@@ -48,11 +52,13 @@ def edit_snow(request,id=None):
 
     return render(request,'snow/snow_form.html',{'form':form})
 
-def plot():
-    place = "Rutgers University"
-    k = 3
+
+def plot(location,number):
+    place = location
+    k = number
     G = ox.graph_from_address(place, network_type='drive')
     ox.plot_graph(G, save=True, file_format='png', filename='temp2', show=False)
     im = Image.open('/Users/zhenghaodong/Desktop/UI/mysite/images/temp2.png')
     im.save('/Users/zhenghaodong/Desktop/UI/mysite/snow/static/snow/images/temp2.png','png')
 
+#####################################################################

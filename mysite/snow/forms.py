@@ -12,9 +12,16 @@ class Snowcarform(ModelForm):
         model = Snowcar
         fields = ['carnum']
 
-class Snowdata(forms.ModelForm):
+#class Snowdata(forms.ModelForm):
   # address = forms.CharField(max_length=30)
   #  numcar = forms.CharField(max_length=10)
-      class Meta:
-        model=userinput
-        fields = ['loc','num']
+     # class Meta:
+     #   model=userinput
+     #   fields = ['loc','num']
+
+
+
+
+class Snowdata(forms.Form):
+    loc = forms.CharField(max_length=30)
+    num = forms.CharField(max_length=10)
