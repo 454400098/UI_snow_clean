@@ -34,7 +34,7 @@ def add_snow(request):
             number = form.cleaned_data['num']
             plot(location, number)
             #form.save()
-         #   return HttpResponseRedirect('/result',{'form':form})
+            return HttpResponseRedirect('/result',{'form':form})
     else:
         form=Snowdata()
     return render(request,'snow/snow_form.html', {'form':form})
@@ -51,6 +51,8 @@ def edit_snow(request,id=None):
         form.save()
 
     return render(request,'snow/snow_form.html',{'form':form})
+
+
 
 
 def plot(location,number):
