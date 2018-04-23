@@ -23,5 +23,8 @@ class Snowcarform(ModelForm):
 
 
 class Snowdata(forms.Form):
-    loc = forms.CharField(max_length=30)
-    num = forms.CharField(max_length=10)
+    loc = forms.CharField(label='Working address',max_length=30)
+    num = forms.CharField(label='Number of cars',max_length=10)
+    st = forms.CharField(label='Start',max_length=10)
+    en = forms.CharField(label='End',max_length=10)
+
