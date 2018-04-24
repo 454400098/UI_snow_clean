@@ -24,3 +24,4 @@ class Snowcar(models.Model):
 class userinput(models.Model):
     loc = models.CharField(default= '',max_length=20)
     num = models.CharField(default= '',max_length=20)
+

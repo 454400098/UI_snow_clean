@@ -4,8 +4,8 @@ import network, dijkstra
 from tour_planner import TourPlanner
 from PIL import Image
 
-def snow_clearance(k,place,pp1,pp2):
-    
+def snow_clearance(k,location,pp1,pp2):
+    place=location
     #place = "Rutgers University"
     #k = int(args["k"])
     pp_vertices = pp1, pp2
@@ -15,7 +15,7 @@ def snow_clearance(k,place,pp1,pp2):
     graph = network.convert_osnx_to_own(G)
 
     c, priority_path = dijkstra.find(graph, pp_vertices[0], pp_vertices[1])
-    print('Priority path for snow clearance: {}'.format(priority_path))
+    #print('Priority path for snow clearance: {}'.format(priority_path))
 
     priority_edges = []
     for i in range(0, (len(priority_path)-1)):
@@ -28,9 +28,9 @@ def snow_clearance(k,place,pp1,pp2):
 
     tour_planner = TourPlanner(graph=graph, k=k)
 
-    print("\n\n##################################################\n")
-    print('Finding clusters on the map based on road connectivity\n')
-    print("##################################################\n")
+    #print("\n\n##################################################\n")
+    #print('Finding clusters on the map based on road connectivity\n')
+    #print("##################################################\n")
 
     clusters = tour_planner.cluster()
     m_clusters = []
@@ -49,18 +49,21 @@ def snow_clearance(k,place,pp1,pp2):
                 break
     ox.plot_graph(G, node_size=0, edge_color=ec,save=True, show=False, filename='clustering')
 
-    print("\n\n##################################################\n")
-    print('Planning routes for all the vehicles\n')
-    print("##################################################\n")
+    #print("\n\n##################################################\n")
+    #print('Planning routes for all the vehicles\n')
+    #print("##################################################\n")
 
     tours, times = tour_planner.plan(clusters, priority_path)
 
     for i, tour in enumerate(tours):
-        print('\n\n######### VEHICLE {} ########\n\nRoute: {} \n\nTime: {}'.format(i, tours[i], times[i]))
+        pass
+        #print('\n\n######### VEHICLE {} ########\n\nRoute: {} \n\nTime: {}'.format(i, tours[i], times[i]))
     display=''
+
     for i, tour in enumerate(tours):
-        display=display+'\n\n######### VEHICLE {} ########\n\nRoute: {} \n\nTime: {}'.format(i, tours[i], times[i])
-    print (display)
+        pass
+        #display=display+'\n\n######### VEHICLE {} ########\n\nRoute: {} \n\nTime: {}'.format(i, tours[i], times[i])
+    #print (display)
 
     tour_clusters = []
     for tour in tours.values():
@@ -82,11 +85,13 @@ def snow_clearance(k,place,pp1,pp2):
 
     ox.plot_graph(G, node_size=0, edge_color=ec,save=True, show=False, filename='end')
 
-    print("Done planning!")
+    #print("Done planning!")
     img = Image.open('images/priority_path.png')
-    img.show('aaa')
+    #img.show('aaa')
+    img.save('snow/static/snow/images/temp1.png', 'png')
     img = Image.open('images/end.png')
-    img.show('bbb')
+    img.save('snow/static/snow/images/temp2.png', 'png')
+    #img.show('bbb')
     return display
 
 

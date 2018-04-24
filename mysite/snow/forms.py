@@ -39,8 +39,8 @@ def validate_string(value):
         )
 
 class Snowdata(forms.Form):
-    loc = forms.CharField(label='Working address',max_length=20)
+    loc = forms.CharField(label='Working address',max_length=30)
     num = forms.IntegerField(label='Number of cars',validators=[validate_positive])
-    #st = forms.CharField(label='Start',max_length=10)
-    #en = forms.CharField(label='End',max_length=10)
+    st = forms.CharField(label='Start',max_length=10)
+    en = forms.CharField(label='End',max_length=10)
 

@@ -32,20 +32,20 @@ from snow_main.snow_clearance import snow_clearance
 
 
 def add_snow(request):
-    if os.path.exists('snow/static/snow/images/temp1.png'):
-                os.remove('snow/static/snow/images/temp1.png')
+    #if os.path.exists('snow/static/snow/images/temp1.png'):
+               # os.remove('snow/static/snow/images/temp1.png')
     if request.method == "GET":
         form = Snowdata(request.GET)
 
         if form.is_valid():
             place = form.cleaned_data['loc']
             k = int(form.cleaned_data['num'])
-            plot1(place, k)
-            #pp_1= int(form.cleaned_data['st'])
-            #pp_2 = int(form.cleaned_data['en'])
+            #plot1(place, k)
+            pp_1= int(form.cleaned_data['st'])
+            pp_2 = int(form.cleaned_data['en'])
             #pp_1=1
             #pp_2=98
-            #snow_clearance(place,k,pp_1,pp_2)
+            snow_clearance(k,place,pp_1,pp_2)
             #form.save()
             return HttpResponseRedirect('/result',{'form':form})
     else:
@@ -59,6 +59,13 @@ def result(request):
    #plot(add_snow.location, add_snow.number)
     return render(request,'snow/result.html', {'result':re})
 
+def result2(request):
+    re=Snowdata(request.GET)
+
+
+   #plot(add_snow.location, add_snow.number)
+    return render(request,'snow/result2.html', {'result':re})
+
 def edit_snow(request,id=None):
     item = get_object_or_404(Snow,id=id) #return object with id or raist 404 error
     form = SnowForm(request.POST or None, instance=item)
@@ -69,6 +76,7 @@ def edit_snow(request,id=None):
 
 
 #snow_clearance("Rutgers University",3,1,98)
+
 
 def plot1(location,number):
     place = location

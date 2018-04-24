@@ -80,7 +80,7 @@ def _find_good_starting_centroids(graph, k, distances):
     for vertex in hull.vertices:
         hull_vertices.append(vertex+1)
 
-    gap = int(len(hull_vertices))/int(k)
+    gap = len(hull_vertices)/k
 
     centers = []
 
